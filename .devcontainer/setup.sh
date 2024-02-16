@@ -13,9 +13,6 @@ else
 	SITE_HOST="https://${CODESPACE_NAME}-8080.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
 fi
 
-# Install Git SVN
-#sudo apt-get -y install --no-install-recommends git-svn perl
-
 # Install dependencies
 cd /workspaces/${LOCAL_WORKSPACE}
 npm install && npm run build:dev
