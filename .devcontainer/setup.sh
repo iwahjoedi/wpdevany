@@ -2,11 +2,18 @@
 
 set -eux
 
+echo "Installing Subversion..."
+#sudo apk update
+#sudo apk add --no-cache  git-svn subversion perl
+
 if [ -z ${CODESPACE_NAME+x} ]; then
 	SITE_HOST="http://localhost:8080"
 else
 	SITE_HOST="https://${CODESPACE_NAME}-8080.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
 fi
+
+# Install Git SVN
+sudo apt-get -y install --no-install-recommends git-svn perl
 
 # Install dependencies
 cd /workspaces/wpdevany
