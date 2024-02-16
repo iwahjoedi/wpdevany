@@ -9,7 +9,7 @@ else
 fi
 
 # Install dependencies
-cd /workspaces/wordpress-development
+cd /workspaces/wpdevany
 npm install && npm run build:dev
 
 # Config ENV
