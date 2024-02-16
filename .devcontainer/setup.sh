@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -eux
+LOCAL_WORKSPACE=$(echo "${GITHUB_REPOSITORY}" | cut -f 2 -d "/")
 
 echo "Installing Subversion..."
 #sudo apk update
@@ -13,15 +14,15 @@ else
 fi
 
 # Install Git SVN
-sudo apt-get -y install --no-install-recommends git-svn perl
+#sudo apt-get -y install --no-install-recommends git-svn perl
 
 # Install dependencies
-cd /workspaces/wpdevany
+cd /workspaces/${LOCAL_WORKSPACE}
 npm install && npm run build:dev
 
 # Config ENV
-sudo sed -i -r "s@.*LOCAL_WP_HOME.*@LOCAL_WP_HOME=https://${CODESPACE_NAME}-8889.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}@" /workspaces/wordpress-development/.env
-sudo sed -i -r "s@.*LOCAL_WP_SITEURL.*@LOCAL_WP_SITEURL=https://${CODESPACE_NAME}-8889.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}@" /workspaces/wordpress-development/.env
+sudo sed -i -r "s@.*LOCAL_WP_HOME.*@LOCAL_WP_HOME=https://${CODESPACE_NAME}-8889.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}@" /workspaces/${LOCAL_WORKSPACE}/.env
+sudo sed -i -r "s@.*LOCAL_WP_SITEURL.*@LOCAL_WP_SITEURL=https://${CODESPACE_NAME}-8889.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}@" /workspaces/${LOCAL_WORKSPACE}/.env
 
 
 # Install WordPress and activate the plugin/theme.
